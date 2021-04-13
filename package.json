@@ -1,0 +1,22 @@
+{
+  "name": "mariemichee_5_08042021",
+  "version": "1.0.0",
+  "description": "Application web de e-commerce Orinoco",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MMary13/MarieMichee_5_08042021.git"
+  },
+  "author": "Marie Michee",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MMary13/MarieMichee_5_08042021/issues"
+  },
+  "homepage": "https://github.com/MMary13/MarieMichee_5_08042021#readme",
+  "dependencies": {
+    "bootstrap": "^4.6.0"
+  }
+}

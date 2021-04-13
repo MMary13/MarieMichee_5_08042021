@@ -1,0 +1,8 @@
+@import "./variables-override.scss";
+@import "../node_modules/bootstrap/scss/bootstrap.scss";
+
+
+
+footer a {
+    color: $secondary;
+}
