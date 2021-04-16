@@ -9928,6 +9928,20 @@ h3 {
     border-color: #dee2e6;
   }
 }
+.nav-item {
+  font-size: large;
+  font-weight: 700;
+}
+
+.btn-primary {
+  color: #B36F98;
+  font-weight: bold;
+}
+
+.btn-primary:hover, .btn-primary:focus {
+  color: #8c4a72;
+}
+
 footer a {
   color: #B36F98;
 }

@@ -1,0 +1,1 @@
+(()=>{var e=document.getElementsByClassName("card");console.log(e.length)})();

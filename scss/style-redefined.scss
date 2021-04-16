@@ -1,0 +1,25 @@
+@import "./variables-override";
+
+
+// Header-------------------------
+.nav-item {
+font-size: large;
+font-weight: 700;
+}
+
+// Page d'acceuil------------------
+.btn-primary{
+    color: $secondary;
+    font-weight: bold;
+}
+
+.btn-primary:hover, .btn-primary:focus {
+    color: darken($color: $secondary, $amount: 15);
+}
+
+
+
+// Footer ---------------------------
+footer a {
+    color: $secondary;
+}

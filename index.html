@@ -7,6 +7,7 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="./css/style.css">
+    <script type="text/javascript" src="./index.js"></script>
 
 
     <title>Orinoco</title>  
@@ -31,11 +32,21 @@
 </header>
 
 
-<div class="container my-5">
+<main class="container my-5">
     <div class="row">
         <div class="col-12 col-lg-4 mb-4">
             <div class="card h-100 text-center px-auto border-primary shadow">
-                <img  class="card-img-top" src="./images/cameras/vcam_1.jpg" alt="Camera">
+                <img  class="card-img-top" src="" alt="Camera">
+                <div class="card-body">
+                   <h5 class="card-title">Camera Name</h5>
+                   <p class="card-text">Camera description</p>
+                   <a class="btn btn-primary stretched-link" href="produit.html?id=value1" role="button">Détails du produit</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-lg-4 mb-4">
+            <div class="card h-100 text-center border-primary shadow">
+                <img  class="card-img-top" src="" alt="Camera">
                 <div class="card-body">
                    <h5 class="card-title">Camera Name</h5>
                    <p class="card-text">Camera description</p>
@@ -45,7 +56,7 @@
         </div>
         <div class="col-12 col-lg-4 mb-4">
             <div class="card h-100 text-center border-primary shadow">
-                <img  class="card-img-top" src="./images/cameras/vcam_2.jpg" alt="Camera">
+                <img  class="card-img-top" src="" alt="Camera">
                 <div class="card-body">
                    <h5 class="card-title">Camera Name</h5>
                    <p class="card-text">Camera description</p>
@@ -55,7 +66,7 @@
         </div>
         <div class="col-12 col-lg-4 mb-4">
             <div class="card h-100 text-center border-primary shadow">
-                <img  class="card-img-top" src="./images/cameras/vcam_3.jpg" alt="Camera">
+                <img  class="card-img-top" src="" alt="Camera">
                 <div class="card-body">
                    <h5 class="card-title">Camera Name</h5>
                    <p class="card-text">Camera description</p>
@@ -65,17 +76,7 @@
         </div>
         <div class="col-12 col-lg-4 mb-4">
             <div class="card h-100 text-center border-primary shadow">
-                <img  class="card-img-top" src="./images/cameras/vcam_4.jpg" alt="Camera">
-                <div class="card-body">
-                   <h5 class="card-title">Camera Name</h5>
-                   <p class="card-text">Camera description</p>
-                   <a class="btn btn-primary stretched-link" href="produit.html" role="button">Détails du produit</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-lg-4 mb-4">
-            <div class="card h-100 text-center border-primary shadow">
-                <img  class="card-img-top" src="./images/cameras/vcam_5.jpg" alt="Camera">
+                <img  class="card-img-top" src="" alt="Camera">
                 <div class="card-body">
                    <h5 class="card-title">Camera Name</h5>
                    <p class="card-text">Camera description</p>
@@ -84,7 +85,7 @@
             </div>
         </div>
     </div>
-</div>
+</main>
 
 <footer class="container-fluid bg-primary py-4">
     <div class="row">
@@ -104,6 +105,9 @@
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    
+
+<!-- Bundle -->
+<script src="./dist/polyfill.bundle.js"></script>
+<script src="./dist/app.bundle.js"></script>
 </body>
 </html>
