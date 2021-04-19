@@ -1,16 +1,25 @@
 document.addEventListener('DOMContentLoaded', function(){ 
-    let cameraInfo = document.getElementById("camera-informations");
-
-    
+  
 function getCameraById (id) {
     let url = "http://localhost:3000/api/cameras/"+id;
     fetch(url)
         .then(response => {
             if (response.ok) {
                 response.json().then (data => {
-                    cameraInfo.getElementsByTagName("h1")[0].innerHTML = data.name;
+                    let imageCamera = document.getElementById("img-camera");
+                    imageCamera.setAttribute("alt",data.name);
+                    imageCamera.setAttribute("src",data.imageUrl);
+                    document.querySelector("#camera-informations h1").innerHTML = data.name;
                     document.getElementById("description-camera").innerHTML = data.description;
-                    document.getElementById("prix-camera").innerHTML = data.price;
+                    document.getElementById("prix-camera").innerHTML = "Prix : "+ data.price +"€";
+                    let lensesSelector = document.getElementById("lenses");
+                    let lensesType = data.lenses;
+                    for (const lens of lensesType) {
+                        let lensType = document.createElement("option");
+                        lensType.setAttribute("value",lens);
+                        lensType.innerHTML = lens;
+                        lensesSelector.appendChild(lensType);
+                    }
                 });
             } else {
                 alert("HTTP-Error: " + error.status)
