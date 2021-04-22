@@ -14,9 +14,13 @@ fetch(urlApi)
                 let imageCamera = document.getElementById("img-camera");
                 imageCamera.setAttribute("alt",data.name);
                 imageCamera.setAttribute("src",data.imageUrl);
-                document.querySelector("#camera-informations h1").innerHTML = data.name;
+                let titleElement = document.querySelector("#camera-informations h1");
+                titleElement.innerHTML = data.name;
+                titleElement.setAttribute("value", data.name);
                 document.getElementById("description-camera").innerHTML = data.description;
-                document.getElementById("prix-camera").innerHTML = "Prix : "+ data.price +"€";
+                let priceElement = document.getElementById("prix-camera");
+                priceElement.innerHTML = "Prix : "+ data.price +"€";
+                priceElement.setAttribute("value",data.price);
                 let lensesSelector = document.getElementById("lenses");
                 let lensesType = data.lenses;
                 for (const lens of lensesType) {
@@ -39,32 +43,29 @@ fetch(urlApi)
     event.preventDefault();
     event.stopPropagation();
     //Get the data
-    const productName = document.querySelector("#camera-informations h1");
-    const productPrice = document.getElementById("prix-camera");
-    const lenses = document.getElementById("lenses");
-    const productOption = lenses.options[lenses.selectedIndex].value;
-    const quantity = document.getElementById("article-number");
-    const numberOfProduct = quantity.options[quantity.selectedIndex].value;
+    const productName = document.querySelector("#camera-informations h1").getAttribute("value");
+    console.log("Name : " +productName);
+    const productPrice = document.getElementById("prix-camera").getAttribute("value");
+    console.log("Prix : " +productPrice);
+    const productOption = getSelectValue("lenses");
+    const numberOfProduct = getSelectValue("article-number");
     const product = new CartItem(id,productName,productPrice,numberOfProduct,productOption);
     //Add to localStorage
-    const productKey = (localStorage.length +1).toString();
-    localStorage.setItem(productKey,product);
+    const productString = JSON.stringify(product);
+    console.log("Item à ajouter : " +productString);
+    localStorage.setItem(productName,JSON.stringify(productString));
     console.log("Product add to the shopping cart");
     //Display PopUp to see the shopping cart
     });
 
 });
 //Functions----------------------------------
-function getSelectValue(selectId)
-{
-	/**On récupère l'élement html <select>*/
+//On récupère l'élement html <select> puis on récupère la valeur selectionnée
+function getSelectValue(selectId) {
 	var selectElmt = document.getElementById(selectId);
-	/**
-	selectElmt.options correspond au tableau des balises <option> du select
-	selectElmt.selectedIndex correspond à l'index du tableau options qui est actuellement sélectionné
-	*/
 	return selectElmt.options[selectElmt.selectedIndex].value;
 }
+
 //Classes------------------------------------ 
 class CartItem {
     constructor(itemId,itemName, itemPrice,numberOfItem, itemOption) {

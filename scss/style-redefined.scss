@@ -17,6 +17,17 @@ font-weight: 700;
     color: darken($color: $secondary, $amount: 15);
 }
 
+th {
+    color: $secondary
+}
+
+
+.fa-trash-alt {
+    color: $primary;
+    &:hover {
+        color: $secondary;
+    }
+}
 
 
 // Footer ---------------------------

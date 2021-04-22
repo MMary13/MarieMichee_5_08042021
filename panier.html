@@ -7,6 +7,8 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="./css/style.css">
+    <script src="https://kit.fontawesome.com/ae53c87fa4.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="./panier.js"></script>
 
 
     <title>Orinoco</title>  
@@ -32,7 +34,44 @@
 
 
 <main class="container my-5">
-
+    <div class="row">
+        <div class="col">
+            <div class="alert alert-info alert-dismissible fade show" role="alert">
+                <p class="alert-heading">Livraison gratuite à partir de 50€ d'achat!</p>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">x</span>
+                </button>
+             </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <h1 class="mb-5">Votre panier</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <table class="table table-sm text-center">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Produit</th>
+                    <th scope="col">Quantité</th>
+                    <th scope="col">Prix</th>
+                    <th scope="col">Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
+        </div>
+    </div>
+    <div class="row my-5">
+        <div class="col-0 col-sm-7"></div>
+        <div class="col-12 col-sm-5 text-center text-sm-end">
+            <p id="total" class="border border-secondary border-4 py-3"></p>
+        </div>
+    </div>
 </main>
 
 <footer class="container-fluid bg-primary py-4">
