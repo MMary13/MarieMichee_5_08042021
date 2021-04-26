@@ -9947,9 +9947,14 @@ th {
 }
 
 .fa-trash-alt {
-  color: #F3E9F1;
+  color: #B36F98;
 }
 .fa-trash-alt:hover {
+  color: #F3E9F1;
+}
+
+.feedback {
+  background-color: #F3E9F1;
   color: #B36F98;
 }
 

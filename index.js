@@ -1,11 +1,11 @@
 document.addEventListener('DOMContentLoaded', function(){ 
-    let cards = document.getElementsByClassName("card");
     let cardRow = document.querySelector("main .row");
-
+    // let panierLink = document.querySelector(".nav-link");
+    // panierLink.innerHTML = "Panier (" +localStorage.length +")";
 
  
 // GET all cameras --------------------------------
-fetch("http://localhost:3000/api/cameras/")
+fetch(urlApi)
     .then(response => {
         if (response.ok) {
             response.json().then (data => {
