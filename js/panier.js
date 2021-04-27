@@ -1,16 +1,31 @@
 document.addEventListener('DOMContentLoaded', function() { 
+    getNumberOfArticlesInCart();
     let tableBody = document.querySelector("main table tbody");
     let totalAmount = 0;
     for (let index = 0; index < localStorage.length; index++) {
         let objectItem = JSON.parse(localStorage.getItem(localStorage.key(index)));
-        let row = createTableRow(objectItem.itemId,objectItem.itemName,objectItem.numberOfItem,objectItem.itemPrice,objectItem.totalPrice);
+        let row = createTableRow(localStorage.key(index),objectItem.itemName,objectItem.numberOfItem,objectItem.itemPrice,objectItem.totalPrice);
         tableBody.appendChild(row);
         totalAmount = totalAmount +objectItem.totalPrice;
     }
     document.getElementById("total").innerHTML = "Total de la commande : "+ totalAmount + "€";
     
-    let submitButton = document.getElementById("valider");
-    submitButton.addEventListener('click', function(event) {
+    //Supprimer un élément du panier 'onClick' de l'icon poubelle
+    let trashIcons = document.getElementsByClassName("trash-link");
+    for (const trashIcon of trashIcons) {
+        trashIcon.addEventListener("click", function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            localStorage.removeItem(trashIcon.getAttribute("value"));
+            getNumberOfArticlesInCart();
+            let row = trashIcon.parentElement.parentElement;
+            tableBody.removeChild(row);
+        });
+    }
+    
+
+    //Déclencher la validation du panier lors d'un clic
+    document.getElementById("valider").addEventListener('click', function(event) {
         event.preventDefault();
         event.stopPropagation();
         //Valider le formulaire et récupérer les données
@@ -51,8 +66,15 @@ document.addEventListener('DOMContentLoaded', function() {
             headers: myHeaders
         }
         fetch(urlApi+"order/",fetchData)
-            .then(function(response) {
-                console.log(response);
+            .then(response => {
+                if (response.ok) {
+                response.json().then (data => {
+                    const orderId = data.orderId;
+                    window.location.href ="commande.html?id="+orderId;
+                });
+            } else {
+                alert("HTTP-Error: " + error.status)
+            }
             })
             .catch(error => alert("Un problème est survenu :" + error));
 
@@ -66,35 +88,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 //Functions ------------------------------------------------------------------
 //----------------------------------------------------------------------------
-
-//Créer une ligne du tableau du panier
-function createTableRow(id,name,numberOfArticle,price,totalAmount){
-    let row = document.createElement("tr");
-    row.appendChild(createTrashRowElement(id));
-    row.appendChild(createtRowElement(name));
-    row.appendChild(createtRowElement(numberOfArticle));
-    row.appendChild(createtRowElement(price +"€"));
-    row.appendChild(createtRowElement(totalAmount+"€"));
-    return row
-}
-
-//Créer l'élément pour supprimer une ligne
-function createTrashRowElement(id) {
-    let trashRowElement = document.createElement("th");
-    trashRowElement.setAttribute("scope","row");
-    trashRowElement.setAttribute("value", id);
-    let trashIcon = document.createElement("i");
-    trashIcon.setAttribute("class", "fas fa-trash-alt");
-    trashRowElement.appendChild(trashIcon);
-    return trashRowElement
-}
-
-//Créer un élément d'une ligne
-function createtRowElement(value) {
-    let rowElement = document.createElement("td");
-    rowElement.innerHTML = value;
-    return rowElement
-}
 
 //Valider un formulaire
 function formValidation(form) {

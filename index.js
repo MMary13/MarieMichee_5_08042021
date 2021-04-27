@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', function(){ 
     let cardRow = document.querySelector("main .row");
-    // let panierLink = document.querySelector(".nav-link");
-    // panierLink.innerHTML = "Panier (" +localStorage.length +")";
+    getNumberOfArticlesInCart();
 
  
 // GET all cameras --------------------------------

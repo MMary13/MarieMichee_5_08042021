@@ -18,9 +18,11 @@ font-weight: 700;
 }
 
 //---Panier.html---------------
-th {
-    color: $secondary
+thead {
+    color: $secondary;
+    background-color: $primary;
 }
+
 
 .fa-trash-alt {
     color: $secondary;

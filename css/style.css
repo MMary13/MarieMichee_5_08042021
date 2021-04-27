@@ -9942,8 +9942,9 @@ h3 {
   color: #8c4a72;
 }
 
-th {
+thead {
   color: #B36F98;
+  background-color: #F3E9F1;
 }
 
 .fa-trash-alt {
