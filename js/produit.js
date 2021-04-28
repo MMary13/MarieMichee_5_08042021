@@ -33,6 +33,31 @@ document.addEventListener('DOMContentLoaded', function(){
         })
         .catch(error => alert("Un problème est survenu :" + error));
 
+        //Augmenter le nombre d'articles-----------------------------
+        document.querySelector(".fa-plus-square").addEventListener('click', function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            let quantityElement = document.getElementById("quantity");
+            let quantityValue = quantityElement.value;
+            quantityValue++;
+            quantityElement.value = quantityValue;
+            quantityElement.setAttribute("placeholder", quantityValue);
+        });
+
+        //Diminuer le nombre d'articles-----------------------------
+        document.querySelector(".fa-minus-square").addEventListener('click', function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            let quantityElement = document.getElementById("quantity");
+            let quantityValue = quantityElement.value;
+            if(quantityValue>1) {
+                quantityValue--;
+                quantityElement.value = quantityValue;
+                quantityElement.setAttribute("placeholder", quantityValue);
+            }
+            
+        });
+
         //Add product in localStorage 'on click'----------------------
         let addToCard = document.getElementById("addToCart");
         addToCard.addEventListener('click', function(event) {
@@ -42,7 +67,7 @@ document.addEventListener('DOMContentLoaded', function(){
             const productName = document.querySelector("#camera-informations h1").getAttribute("value");
             const productPrice = document.getElementById("prix-camera").getAttribute("value");
             const productOption = getSelectValue("lenses");
-            const numberOfProduct = getSelectValue("article-number");
+            const numberOfProduct = document.getElementById("quantity").value;
             const product = new CartItem(id,productName,productPrice,numberOfProduct,productOption);
             //Add to localStorage
             let key = (localStorage.length +1).toString();

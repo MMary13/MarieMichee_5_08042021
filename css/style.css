@@ -9942,6 +9942,15 @@ h3 {
   color: #8c4a72;
 }
 
+#quantity {
+  width: 40px;
+  height: 30px;
+}
+
+#moreButton, #minusButton {
+  font-size: 20px;
+}
+
 thead {
   color: #B36F98;
   background-color: #F3E9F1;
@@ -9952,6 +9961,10 @@ thead {
 }
 .fa-trash-alt:hover {
   color: #F3E9F1;
+}
+
+.input-quantity {
+  width: 30px;
 }
 
 .feedback {

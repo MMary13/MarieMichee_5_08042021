@@ -22,6 +22,44 @@ document.addEventListener('DOMContentLoaded', function() {
             tableBody.removeChild(row);
         });
     }
+
+    //Augmenter le nombre d'articles-----------------------------
+    let moreButtons = document.getElementsByClassName("fa-plus-square");
+    for (const moreButton of moreButtons) {
+        moreButton.addEventListener('click', function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            let quantityElement = moreButton.parentElement.nextElementSibling;
+            let quantityValue = quantityElement.getAttribute("value");
+            quantityValue++;
+            quantityElement.setAttribute("value",quantityValue);
+            quantityElement.innerHTML = quantityValue;
+            let key = moreButton.parentElement.getAttribute("value");
+            quantityItemUpdate(key,quantityValue);
+            getNumberOfArticlesInCart();
+        });
+    }
+    
+
+    //Diminuer le nombre d'articles-----------------------------
+    let minusButtons = document.getElementsByClassName("fa-minus-square");
+    for (const minusButton of minusButtons) {
+        minusButton.addEventListener('click', function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            let quantityElement = minusButton.parentElement.previousElementSibling;
+            let quantityValue = quantityElement.getAttribute("value");
+            if(quantityValue>1) {
+                quantityValue--;
+                quantityElement.setAttribute("value", quantityValue);
+                quantityElement.innerHTML = quantityValue;
+                let key = minusButton.parentElement.getAttribute("value");
+                quantityItemUpdate(key,quantityValue);
+                getNumberOfArticlesInCart();
+            }
+        });
+    }
+    
     
 
     //Déclencher la validation du panier lors d'un clic
@@ -88,6 +126,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
 //Functions ------------------------------------------------------------------
 //----------------------------------------------------------------------------
+//Modifier la quantité d'un item dans le localStorage
+function quantityItemUpdate(key,quantity) {
+    let item = JSON.parse(localStorage.getItem(key));
+    item.numberOfItem = quantity;
+    localStorage.setItem(key, JSON.stringify(item));
+}
 
 //Valider un formulaire
 function formValidation(form) {

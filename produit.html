@@ -6,6 +6,7 @@
     <link rel="icon" sizes="144x144" href="./images/favicon.png">
 
     <!-- CSS -->
+    <script src="https://kit.fontawesome.com/ae53c87fa4.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./css/style.css">
     <script type="text/javascript" src="./js/utils.js"></script>
     <script type="text/javascript" src="./js/produit.js"></script>
@@ -50,22 +51,13 @@
                 <label for="lenses">Type de lentille :</label>
                 <select id="lenses" class="form-select" aria-label="Sélection du type de lentille">
                 </select>
-            </div>
-            
+            </div>          
+
             <div class="form-group mb-4">
-                <label for="article-number">Quantité :</label>
-                <select id="article-number" class="form-select" aria-label="Sélection du nombre d'articles">
-                    <option value="1" selected>1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                </select>
+                <label for="quantity">Quantité :</label>
+                <a href="" class="text-secondary" id="moreButton"><i class="fas fa-plus-square fa-lg"></i></a>
+                <input type="number" id="quantity" name="quantity" min="1" placeholder="1" value="1">
+                <a href="" class="text-secondary" id="minusButton"><i class="fas fa-minus-square fa-lg"></i></a>
             </div>
 
             <button id="addToCart" class="btn btn-primary">Ajouter au panier</button>

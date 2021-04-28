@@ -25,7 +25,7 @@ function createTableRow(key,name,numberOfArticle,price,totalAmount){
     let row = document.createElement("tr");
     row.appendChild(createTrashRowElement(key));
     row.appendChild(createtRowElement(name));
-    row.appendChild(createtRowElement(numberOfArticle));
+    row.appendChild(createNumberOfArticlesElement(key,numberOfArticle));
     row.appendChild(createtRowElement(price +"€"));
     row.appendChild(createtRowElement(totalAmount+"€"));
     return row
@@ -59,4 +59,34 @@ function createtRowElement(value) {
     let rowElement = document.createElement("td");
     rowElement.innerHTML = value;
     return rowElement
+}
+
+//Créer l'élément + ou - d'articles
+function createNumberOfArticlesElement(key,quantity) {
+    let numberElement = document.createElement("td");
+    numberElement.setAttribute("class","d-flex justify-content-center")
+    //Create the + button
+    let moreLink = document.createElement("a");
+    moreLink.setAttribute("class", "text-secondary");
+    moreLink.setAttribute("value", key);
+    let moreIcon = document.createElement("i");
+    moreIcon.setAttribute("class", "fas fa-plus-square fa-lg");
+    moreLink.appendChild(moreIcon);
+    //Create the - button
+    let minusLink = document.createElement("a");
+    minusLink.setAttribute("class", "text-secondary");
+    minusLink.setAttribute("value", key);
+    let minusIcon = document.createElement("i");
+    minusIcon.setAttribute("class", "fas fa-minus-square fa-lg");
+    minusLink.appendChild(minusIcon);
+    //Create the input number
+    let inputNumber = document.createElement("div");
+    inputNumber.setAttribute("class","quantity mx-2");
+    inputNumber.setAttribute("value",quantity);
+    inputNumber.innerHTML = quantity;
+    //Ajouter les différents éléments au rowElement
+    numberElement.appendChild(moreLink);
+    numberElement.appendChild(inputNumber);
+    numberElement.appendChild(minusLink);
+    return numberElement
 }
