@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', function(){ 
+    let popUp = document.getElementById("myPopUp");
+    popUp.style.display = "none";
     getNumberOfArticlesInCart();
     //Get the id from URL------------
     const id = getIdFromUrl();
@@ -74,6 +76,8 @@ document.addEventListener('DOMContentLoaded', function(){
             localStorage.setItem(key,JSON.stringify(product));
             getNumberOfArticlesInCart();
             //Display PopUp to see the shopping cart
+            //window.open( page [,nom] [,options] )
+            popUp.style.display = "block";
         });
 
 });

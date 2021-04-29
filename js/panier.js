@@ -1,15 +1,13 @@
 document.addEventListener('DOMContentLoaded', function() { 
     getNumberOfArticlesInCart();
     let tableBody = document.querySelector("main table tbody");
-    let totalAmount = 0;
     for (let index = 0; index < localStorage.length; index++) {
         let objectItem = JSON.parse(localStorage.getItem(localStorage.key(index)));
         let row = createTableRow(localStorage.key(index),objectItem.itemName,objectItem.numberOfItem,objectItem.itemPrice,objectItem.totalPrice);
         tableBody.appendChild(row);
-        totalAmount = totalAmount +objectItem.totalPrice;
     }
-    document.getElementById("total").innerHTML = "Total de la commande : "+ totalAmount + "€";
-    
+    getTotalOrder();
+
     //Supprimer un élément du panier 'onClick' de l'icon poubelle
     let trashIcons = document.getElementsByClassName("trash-link");
     for (const trashIcon of trashIcons) {
@@ -20,6 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
             getNumberOfArticlesInCart();
             let row = trashIcon.parentElement.parentElement;
             tableBody.removeChild(row);
+            getTotalOrder();
         });
     }
 
@@ -37,6 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
             let key = moreButton.parentElement.getAttribute("value");
             quantityItemUpdate(key,quantityValue);
             getNumberOfArticlesInCart();
+            getTotalOrder();
         });
     }
     
@@ -56,6 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 let key = minusButton.parentElement.getAttribute("value");
                 quantityItemUpdate(key,quantityValue);
                 getNumberOfArticlesInCart();
+                getTotalOrder();
             }
         });
     }
@@ -126,10 +127,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
 //Functions ------------------------------------------------------------------
 //----------------------------------------------------------------------------
+//Montant total de la commande
+function getTotalOrder() {
+    let totalAmount = 0;
+    for (let index = 0; index < localStorage.length; index++) {
+        let objectItem = JSON.parse(localStorage.getItem(localStorage.key(index)));
+        totalAmount = totalAmount +objectItem.totalPrice;
+    }
+    document.getElementById("total").innerHTML = "Total de la commande : "+ totalAmount + "€";
+    
+}
+
 //Modifier la quantité d'un item dans le localStorage
 function quantityItemUpdate(key,quantity) {
     let item = JSON.parse(localStorage.getItem(key));
     item.numberOfItem = quantity;
+    item.totalPrice = item.numberOfItem*item.itemPrice;
     localStorage.setItem(key, JSON.stringify(item));
 }
 
