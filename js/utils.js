@@ -2,7 +2,7 @@
 let urlApi = "http://localhost:3000/api/cameras/";
 
 //Functions-------------------------------------------------
-//Afficher le nombre d'articles dans le panier
+//Display the number of articles present in the cart
 function getNumberOfArticlesInCart() { 
     let panierLink = document.querySelector(".nav-link");
     let numberOfArticles = 0;
@@ -20,73 +20,96 @@ function getIdFromUrl() {
     return url.searchParams.get("id");
 }
 
-//Créer une ligne du tableau du panier
-function createTableRow(key,name,numberOfArticle,price,totalAmount){
+//Create DOM element--------------------------------------------------------------
+//Create an element image---------------------------------------------
+function createImageElement(elementClass,altText,elementSource) {
+    let imageCard = createHtmlElement("img",elementClass);
+    imageCard.setAttribute("alt",altText);
+    imageCard.setAttribute("src",elementSource);
+    return imageCard;
+}
+
+//Create an element link---------------------------------------------
+function createLinkElement(elementClass,elementRole,elementHref,value) {
+    let linkElement = createElementWithValue("a",elementClass,value);
+    linkElement.setAttribute("role",elementRole);
+    linkElement.setAttribute("href",elementHref);
+    return linkElement;
+}
+
+//Create an element with value---------------------------------------------
+function createElementWithValue(elementTagName,elementClass,value) {
+    let element = createHtmlElement(elementTagName,elementClass);
+    element.innerHTML = value;
+    return element;
+}
+
+//Create an element ---------------------------------------------
+function createHtmlElement(elementTagName,elementClass) {
+    let element = document.createElement(elementTagName);
+    element.setAttribute("class",elementClass);
+    return element;
+}
+
+//Create table's row for the cart
+function createCartTableRow(key,name,numberOfArticle,price,totalAmount){
     let row = document.createElement("tr");
     row.appendChild(createTrashRowElement(key));
     row.appendChild(createtRowElement(name));
     row.appendChild(createNumberOfArticlesElement(key,numberOfArticle));
     row.appendChild(createtRowElement(price +"€"));
     row.appendChild(createtRowElement(totalAmount+"€"));
-    return row
+    return row;
 }
 
-function createTableRowSummary(name,numberOfArticle,price,totalAmount){
+//Create table's row for order summary
+function createSummaryTableRow(name,numberOfArticle,price,totalAmount){
     let row = document.createElement("tr");
     row.appendChild(createtRowElement(name));
     row.appendChild(createtRowElement(numberOfArticle));
     row.appendChild(createtRowElement(price +"€"));
     row.appendChild(createtRowElement(totalAmount+"€"));
-    return row
-}
-
-//Créer l'élément pour supprimer une ligne
-function createTrashRowElement(key) {
-    let trashRowElement = document.createElement("th");
-    trashRowElement.setAttribute("scope","row");
-    let trashLink = document.createElement("a");
-    trashLink.setAttribute("class", "trash-link");
-    trashLink.setAttribute("value", key);
-    let trashIcon = document.createElement("i");
-    trashIcon.setAttribute("class", "fas fa-trash-alt");
-    trashLink.appendChild(trashIcon);
-    trashRowElement.appendChild(trashLink);
-    return trashRowElement
+    return row;
 }
 
 //Créer un élément d'une ligne
 function createtRowElement(value) {
     let rowElement = document.createElement("td");
     rowElement.innerHTML = value;
-    return rowElement
+    return rowElement;
 }
 
-//Créer l'élément + ou - d'articles
+//Create trash element for a row
+function createTrashRowElement(key) {
+    let trashRowElement = document.createElement("th");
+    trashRowElement.setAttribute("scope","row");
+    let trashLink = createHtmlElement("a","trash-link");
+    trashLink.setAttribute("value", key);
+    let trashIcon = createHtmlElement("i","fas fa-trash-alt");
+    trashLink.appendChild(trashIcon);
+    trashRowElement.appendChild(trashLink);
+    return trashRowElement;
+}
+
+//Create element more/minus of a row
 function createNumberOfArticlesElement(key,quantity) {
-    let numberElement = document.createElement("td");
-    numberElement.setAttribute("class","d-flex justify-content-center")
+    let numberElement = createHtmlElement("td","d-flex justify-content-center");
     //Create the + button
-    let moreLink = document.createElement("a");
-    moreLink.setAttribute("class", "text-secondary");
+    let moreLink = createHtmlElement("a","text-secondary");
     moreLink.setAttribute("value", key);
-    let moreIcon = document.createElement("i");
-    moreIcon.setAttribute("class", "fas fa-plus-square fa-lg");
+    let moreIcon = createHtmlElement("i","fas fa-plus-square fa-lg");
     moreLink.appendChild(moreIcon);
     //Create the - button
-    let minusLink = document.createElement("a");
-    minusLink.setAttribute("class", "text-secondary");
+    let minusLink = createHtmlElement("a","text-secondary");
     minusLink.setAttribute("value", key);
-    let minusIcon = document.createElement("i");
-    minusIcon.setAttribute("class", "fas fa-minus-square fa-lg");
+    let minusIcon = createHtmlElement("i","fas fa-minus-square fa-lg");
     minusLink.appendChild(minusIcon);
     //Create the input number
-    let inputNumber = document.createElement("div");
-    inputNumber.setAttribute("class","quantity mx-2");
+    let inputNumber = createElementWithValue("div","quantity mx-2",quantity);
     inputNumber.setAttribute("value",quantity);
-    inputNumber.innerHTML = quantity;
-    //Ajouter les différents éléments au rowElement
+    //Add the different elements to the rowElement
     numberElement.appendChild(moreLink);
     numberElement.appendChild(inputNumber);
     numberElement.appendChild(minusLink);
-    return numberElement
+    return numberElement;
 }

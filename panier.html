@@ -8,8 +8,8 @@
     <!-- CSS -->
     <link rel="stylesheet" href="./css/style.css">
     <script src="https://kit.fontawesome.com/ae53c87fa4.js" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="./js/utils.js"></script>
-    <script type="text/javascript" src="./js/panier.js"></script>
+    <script src="./js/utils.js"></script>
+    <script src="./js/panier.js"></script>
 
 
     <title>Orinoco</title>  
@@ -35,84 +35,95 @@
 
 
 <main class="container my-5">
-    <div class="row">
+    <div id="empty-cart" class="row">
         <div class="col">
-            <div class="alert alert-info alert-dismissible fade show" role="alert">
-                <p class="alert-heading">Livraison gratuite à partir de 50€ d'achat!</p>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">x</span>
-                </button>
-             </div>
+            <div class="alert alert-warning d-flex flex-column align-items-center my-5 p-3" role="alert">
+                <p class="h1 text-secondary mb-5"> Votre panier est vide <i class="far fa-frown"></i></p>
+                <a  class="btn btn-secondary" href="index.html" role="button">Go shopping !</a>
+            </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-12">
-            <h1 class="mb-5">Votre panier</h1>
+    <div id="main-content">
+        <div class="row">
+            <div class="col">
+                <div class="alert alert-info alert-dismissible fade show" role="alert">
+                    <p class="alert-heading">Livraison gratuite à partir de 50€ d'achat!</p>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">x</span>
+                    </button>
+                 </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <h1 class="mb-5">Votre panier</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <table class="table table-sm text-center">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Produit</th>
+                        <th scope="col">Quantité</th>
+                        <th scope="col">Prix</th>
+                        <th scope="col">Total</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                  </table>
+            </div>
+        </div>
+        <div class="row my-2 flex-row-reverse">
+            <div class="col-12 col-sm-5 text-center text-sm-end">
+                <p id="total" class="border border-4 border-secondary p-3 bg-secondary h4"></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-8">
+                <h2>Informations Personnelles :</h2>
+                <form class="d-flex flex-column" id="contact-form" action="#">
+                    <div class="form-group mb-3">
+                        <label for="lastNameInput" class="form-label">Nom</label>
+                        <input type="text" class="form-control" id="lastNameInput" required>
+                        <div class="feedback alert alert-danger">Ce champ est obligatoire</div>
+                    </div>
+                    <div class="form-group mb-3">
+                      <label for="firstNameInput" class="form-label">Prénom</label>
+                      <input type="text" class="form-control" id="firstNameInput" required>
+                      <div class="feedback alert alert-danger">Ce champ est obligatoire</div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="addressInput" class="form-label">Adresse</label>
+                        <input type="text" class="form-control" id="addressInput" placeholder="Numéro, Voie, Appartement, Etage ..." required>
+                        <div class="feedback alert alert-danger">Ce champ est obligatoire</div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="cityInput" class="form-label">Ville</label>
+                        <input type="text" class="form-control" id="cityInput" required>
+                        <div class="feedback alert alert-danger">Ce champ est obligatoire</div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="emailInput" class="form-label">Mail</label>
+                        <input type="email" class="form-control" id="emailInput" placeholder="name@exemple" required>
+                        <div class="feedback alert alert-danger">Votre email doit être de la forme name@exemple</div>
+                    </div>
+    
+                    <div class="form-group mb-3 form-check">
+                        <input class="form-check-input" type="checkbox" id="conditionsCheck" required>
+                        <label class="form-check-label" for="conditionsCheck">
+                            J'accepte les termes et conditions.
+                        </label>
+                        <div class="feedback alert alert-danger">Veuillez accepter les conditions pour valider la commande.</div>
+                    </div>
+                    <button id="valider" type="submit" value="Ok" class="btn btn-primary align-self-center mt-3">Valider la commande</button>
+                  </form>
+            </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col">
-            <table class="table table-sm text-center">
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Produit</th>
-                    <th scope="col">Quantité</th>
-                    <th scope="col">Prix</th>
-                    <th scope="col">Total</th>
-                  </tr>
-                </thead>
-                <tbody>
-                </tbody>
-              </table>
-        </div>
-    </div>
-    <div class="row my-2 flex-row-reverse">
-        <div class="col-12 col-sm-5 text-center text-sm-end">
-            <p id="total" class="border border-4 border-secondary p-3 bg-secondary h4"></p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12 col-md-8">
-            <h2>Informations Personnelles :</h2>
-            <form class="d-flex flex-column" id="contact-form" action="#">
-                <div class="form-group mb-3">
-                    <label for="lastNameInput" class="form-label">Nom</label>
-                    <input type="text" class="form-control" id="lastNameInput" required>
-                    <div class="feedback"></div>
-                </div>
-                <div class="form-group mb-3">
-                  <label for="firstNameInput" class="form-label">Prénom</label>
-                  <input type="text" class="form-control" id="firstNameInput" required>
-                  <div class="feedback"></div>
-                </div>
-                <div class="form-group mb-3">
-                    <label for="addressInput" class="form-label">Adresse</label>
-                    <input type="text" class="form-control" id="addressInput" placeholder="Numéro, Voie, Appartement, Etage ..." required>
-                    <div class="feedback"></div>
-                </div>
-                <div class="form-group mb-3">
-                    <label for="cityInput" class="form-label">Ville</label>
-                    <input type="text" class="form-control" id="cityInput" required>
-                    <div class="feedback"></div>
-                </div>
-                <div class="form-group mb-3">
-                    <label for="emailInput" class="form-label">Mail</label>
-                    <input type="email" class="form-control" id="emailInput" placeholder="name@exemple" required>
-                    <div class="feedback"></div>
-                </div>
-
-                <div class="form-group mb-3 form-check">
-                    <input class="form-check-input" type="checkbox" id="conditionsCheck" required>
-                    <label class="form-check-label" for="conditionsCheck">
-                        J'accepte les termes et conditions.
-                    </label>
-                    <div class="feedback"></div>
-                </div>
-                <button id="valider" type="submit" value="Ok" class="btn btn-primary align-self-center mt-3">Valider la commande</button>
-              </form>
-        </div>
-    </div>
+ 
 </main>
 
 <footer class="container-fluid bg-primary py-4">
