@@ -1,10 +1,16 @@
 document.addEventListener('DOMContentLoaded', function(){ 
     let cardRow = document.querySelector("main .row");
     getNumberOfArticlesInCart();
+    // GET all cameras --------------------------------
+    getDataFromApi(cardRow);
+});
 
- 
-// GET all cameras --------------------------------
-fetch(urlApi)
+
+//Functions----------------------------------
+//-------------------------------------------
+//GET data from API and display them in card elements--------------------
+function getDataFromApi(cardRow) {
+    fetch(urlApi)
     .then(response => {
         if (response.ok) {
             response.json().then (data => {
@@ -18,12 +24,8 @@ fetch(urlApi)
         }
     })
     .catch(error => alert("Un problème est survenu :" + error));
+}
 
-});
-
-
-//Functions----------------------------------
-//-------------------------------------------
 //Create a card element with all informations-----------------------
 function createCardElement(id,name,imageUrl,description) {
     let colonneCard = createHtmlElement("div","col-12 col-lg-4 mb-4"); 

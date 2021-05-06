@@ -2,9 +2,22 @@ document.addEventListener('DOMContentLoaded', function(){
     let popUp = document.getElementById("myPopUp");
     popUp.style.display = "none";
     getNumberOfArticlesInCart();
-
     //Request GET by ID on the API to display product data----------------------
     const id = getIdFromUrl();
+    getDataFromApiById(id);
+    //Increase the number of articles-----------------------------
+    increaseArticleNumberOnClick();
+    //Decrease the number of articles-----------------------------
+    decreaseArticleNumberOnClick();
+    //Add product in localStorage 'on click'----------------------
+    addProductToCartOnClick(id,popUp);
+});
+
+
+//Functions----------------------------------
+//--------------------------------------------
+//GET data from API by ID---------------------
+function getDataFromApiById(id) {
     fetch(urlApi+id)
         .then(response => {
             if (response.ok) {
@@ -17,56 +30,6 @@ document.addEventListener('DOMContentLoaded', function(){
 
         })
         .catch(error => alert("Un problème est survenu :" + error));
-
-    //Increase the number of articles-----------------------------
-    document.querySelector("#moreButton").addEventListener('click', function(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        let quantityElement = document.getElementById("quantity");
-        let quantityValue = quantityElement.value;
-        quantityValue++;
-        quantityElement.value = quantityValue;
-        quantityElement.setAttribute("placeholder", quantityValue);
-    });
-
-    //Decrease the number of articles-----------------------------
-    document.querySelector("#minusButton").addEventListener('click', function(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        let quantityElement = document.getElementById("quantity");
-        let quantityValue = quantityElement.value;
-        if(quantityValue>1) {
-            quantityValue--;
-            quantityElement.value = quantityValue;
-            quantityElement.setAttribute("placeholder", quantityValue);
-        }      
-    });
-
-    //Add product in localStorage 'on click'----------------------
-    let addToCard = document.getElementById("addToCart");
-    addToCard.addEventListener('click', function(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        //Get the data
-        const productName = document.querySelector("#camera-informations h1").getAttribute("value");
-        const productPrice = document.getElementById("prix-camera").getAttribute("value");
-        const productOption = getSelectValue("lenses");
-        const numberOfProduct = document.getElementById("quantity").value;
-        const product = new CartItem(id,productName,productPrice,numberOfProduct,productOption);
-        //Add to localStorage
-        let key = (localStorage.length +1).toString();
-        localStorage.setItem(key,JSON.stringify(product));
-        getNumberOfArticlesInCart();
-        //Display PopUp to see the shopping cart
-        popUp.style.display = "block";
-    });
-});
-
-//Functions----------------------------------
-//Get the value of a "select" element
-function getSelectValue(selectId) {
-	var selectElmt = document.getElementById(selectId);
-	return selectElmt.options[selectElmt.selectedIndex].value;
 }
 
 //Display the data of a product on the product page
@@ -93,6 +56,58 @@ function createSelectOptions(selectElement, selectOptions) {
         selectElement.appendChild(optionElement);
     }
 }
+
+//Increase the number of articles----------------
+function increaseArticleNumberOnClick() {
+    document.querySelector("#moreButton").addEventListener('click', function(event) {
+        event.preventDefault();
+        let quantityElement = document.getElementById("quantity");
+        let quantityValue = quantityElement.value;
+        quantityValue++;
+        quantityElement.value = quantityValue;
+        quantityElement.setAttribute("placeholder", quantityValue);
+    });
+}
+
+//Decrease the number of articles-------------------
+function decreaseArticleNumberOnClick() {
+    document.querySelector("#minusButton").addEventListener('click', function(event) {
+        event.preventDefault();
+        let quantityElement = document.getElementById("quantity");
+        let quantityValue = quantityElement.value;
+        if(quantityValue>1) {
+            quantityValue--;
+            quantityElement.value = quantityValue;
+            quantityElement.setAttribute("placeholder", quantityValue);
+        }      
+    });
+}
+
+//Add product to cart OnClick-----------------------
+function addProductToCartOnClick(id, popUp) {
+    document.getElementById("addToCart").addEventListener('click', function(event) {
+        event.preventDefault();
+        //Get the data
+        const productName = document.querySelector("#camera-informations h1").getAttribute("value");
+        const productPrice = document.getElementById("prix-camera").getAttribute("value");
+        const productOption = getSelectValue("lenses");
+        const numberOfProduct = document.getElementById("quantity").value;
+        const product = new CartItem(id,productName,productPrice,numberOfProduct,productOption);
+        //Add to localStorage
+        let key = (localStorage.length +1).toString();
+        localStorage.setItem(key,JSON.stringify(product));
+        getNumberOfArticlesInCart();
+        //Display PopUp to see the shopping cart
+        popUp.style.display = "block";
+    });
+}
+
+//Get the value of a "select" element
+function getSelectValue(selectId) {
+	var selectElmt = document.getElementById(selectId);
+	return selectElmt.options[selectElmt.selectedIndex].value;
+}
+
 
 //Classes------------------------------------ 
 class CartItem {

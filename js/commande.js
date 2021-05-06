@@ -1,10 +1,15 @@
 document.addEventListener('DOMContentLoaded', function() {
-    getNumberOfArticlesInCart(); 
+    displayValidatedOrder();
+});
+
+//Function----------------------------
+//Display data of validated order----------
+function displayValidatedOrder() {
     //GET order id from URL------------
     const orderId = getIdFromUrl();
     let orderValidationText = document.getElementById("order-validation");
     orderValidationText.innerHTML = "Vous avez passé la commande n° <strong>" + orderId + "</strong> a été validée et est en cours de préparation.</br>Retrouvez ci-dessous le récapitulatif de cette commande et les détails de livraison."
-    
+        
     //Display order summary -----------------------
     let tableBody = document.querySelector("main table tbody");
     let totalAmount = 0;
@@ -15,8 +20,8 @@ document.addEventListener('DOMContentLoaded', function() {
         totalAmount = totalAmount +objectItem.totalPrice;
     }
     document.getElementById("total").innerHTML = "Total de la commande : "+ totalAmount + "€";
-
+    
     //Clear the localStorage----------------------
     localStorage.clear();
     getNumberOfArticlesInCart();
-});
+}

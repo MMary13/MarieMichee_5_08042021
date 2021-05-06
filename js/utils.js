@@ -55,25 +55,25 @@ function createHtmlElement(elementTagName,elementClass) {
 function createCartTableRow(key,name,numberOfArticle,price,totalAmount){
     let row = document.createElement("tr");
     row.appendChild(createTrashRowElement(key));
-    row.appendChild(createtRowElement(name));
+    row.appendChild(createRowElement(name));
     row.appendChild(createNumberOfArticlesElement(key,numberOfArticle));
-    row.appendChild(createtRowElement(price +"€"));
-    row.appendChild(createtRowElement(totalAmount+"€"));
+    row.appendChild(createRowElement(price +"€"));
+    row.appendChild(createRowElement(totalAmount+"€"));
     return row;
 }
 
 //Create table's row for order summary
 function createSummaryTableRow(name,numberOfArticle,price,totalAmount){
     let row = document.createElement("tr");
-    row.appendChild(createtRowElement(name));
-    row.appendChild(createtRowElement(numberOfArticle));
-    row.appendChild(createtRowElement(price +"€"));
-    row.appendChild(createtRowElement(totalAmount+"€"));
+    row.appendChild(createRowElement(name));
+    row.appendChild(createRowElement(numberOfArticle));
+    row.appendChild(createRowElement(price +"€"));
+    row.appendChild(createRowElement(totalAmount+"€"));
     return row;
 }
 
 //Créer un élément d'une ligne
-function createtRowElement(value) {
+function createRowElement(value) {
     let rowElement = document.createElement("td");
     rowElement.innerHTML = value;
     return rowElement;
