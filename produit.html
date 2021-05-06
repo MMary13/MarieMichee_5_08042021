@@ -2,9 +2,112 @@
 <html lang="fr">
 <head>
     <meta charset="utf-8">
-    <title>.</title>   
+    <meta name="keywords" content="e-commerce, camera, camera vintage, boutique en ligne, appareil photo">
+	  <meta name="title" content="Orinoco - Camera Vintage">
+    <meta name="description" content="Orinoco est une entreprise de commerce en ligne. Elle se démarque des grands site e-commerce en créant des applications thématiques ne vendant qu’un seul groupe de produits. Ici il s'agit d'Oricam une application dédiée à la vente d'appareils photo vintage.">
+    <meta name="robots" content="index,follow">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" sizes="144x144" href="./images/favicon.png">
+
+    <!-- CSS -->
+    <script src="https://kit.fontawesome.com/ae53c87fa4.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="./js/utils.js"></script>
+    <script src="./js/produit.js"></script>
+
+
+    <title>Orinoco</title>  
 </head>
 
 <body>
+<header class="container-fluid bg-primary">
+    <div class="row">
+        <nav class="col navbar navbar-light mx-md-4">
+            <a class="navbar-brand" href="index.html">
+                <img src="./images/logo-orinoco.png" alt="Site logo" width="200" height="95">
+            </a>
+             <div id="navbarContent">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link text-secondary" href="panier.html">Panier</a>
+                    </li>
+                </ul>
+             </div>
+        </nav> 
+    </div>
+</header>
+
+
+<main class="container my-5">
+    <div class="row">
+      <div id="image-container" class="col-12 col-md-6">
+        <!--Image added with JS-->
+      </div>
+      <section class="col-12 col-md-6">
+          <div id="camera-informations">
+            <h1 class="mb-4">Product name</h1>
+            <p id="description-camera" class="mb-4">Description</p>
+            <p id="prix-camera" class="mb-4">Prix :</p>
+          </div>
+          
+          <form action="submit">
+            <div class="form-group mb-4">
+                <label for="lenses">Type de lentille :</label>
+                <select id="lenses" class="form-select" aria-label="Sélection du type de lentille">
+                </select>
+            </div>          
+
+            <div class="form-group mb-4">
+                <label for="quantity">Quantité :</label>
+                <a href="" class="text-secondary" id="moreButton"><i class="fas fa-plus-square fa-lg"></i></a>
+                <input type="number" id="quantity" name="quantity" min="1" placeholder="1" value="1">
+                <a href="" class="text-secondary" id="minusButton"><i class="fas fa-minus-square fa-lg"></i></a>
+            </div>
+
+            <button id="addToCart" class="btn btn-primary">Ajouter au panier</button>
+          </form>
+        </section>
+    </div>
+    <div id="myPopUp" class="modal" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header d-flex justify-content-center">
+              <h5 class="modal-title text-secondary">Article ajouté au panier! <i class="far fa-smile-beam "></i></h5>
+            </div>
+            <div class="modal-body">
+              <p>Bravo! Vous avez ajouté un nouvel article à votre panier!<br>
+                Cliquer ci-dessous pour continuer vos achats ou consulter votre panier.</p>
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+                <a href="index.html" role="button" class="btn btn-primary">Continuer mes achats!</a>
+                <a href="panier.html" role="button" class="btn btn-secondary">Voir mon panier</a>
+            </div>
+          </div>
+        </div>
+      </div>
+</main>
+
+<footer class="container-fluid bg-primary py-4">
+    <div class="row">
+        <div class="col">
+            <ul class="list-inline text-center">
+                <li class="list-inline-item"><a href="#">A propos</a></li>
+                <li class="list-inline-item">&middot;</li>
+                <li class="list-inline-item"><a href="#">Vie privée</a></li>
+                <li class="list-inline-item">&middot;</li>
+                <li class="list-inline-item"><a href="#">Conditions d'utilisations</a></li>
+            </ul>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<!-- Bundle -->
+<script src="./dist/polyfill.bundle.js"></script>
+<script src="./dist/app.bundle.js"></script>
 </body>
 </html>

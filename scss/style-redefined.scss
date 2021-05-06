@@ -1,0 +1,55 @@
+@import "./variables-override";
+
+
+// Header-------------------------
+.nav-item {
+font-size: large;
+font-weight: 700;
+}
+
+//---Page d'acceuil------------------
+.btn-primary{
+    color: $secondary;
+    font-weight: bold;
+}
+
+.btn-primary:hover, .btn-primary:focus {
+    color: darken($color: $secondary, $amount: 15);
+}
+
+//---Page produit--------------
+#quantity {
+    width:40px;
+    height: 30px;
+}
+
+#moreButton, #minusButton {
+    font-size: 20px;
+}
+
+//---Page panier---------------
+thead {
+    color: $secondary;
+    background-color: $primary;
+}
+
+.fa-trash-alt {
+    color: $secondary;
+    &:hover {
+        color: $primary;
+    }
+}
+
+.input-quantity {
+    width: 30px;
+}
+
+// .feedback {
+//     background-color: $primary;
+//     color: $secondary;
+// }
+
+// Footer ---------------------------
+footer a {
+    color: $secondary;
+}
