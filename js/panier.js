@@ -81,38 +81,38 @@ function deleteProductFromCartOnClick(tableBody) {
 
 //Increase number of article in cart----------------
 function increaseArticleQuantityOnClick() {
-    let moreButtons = document.getElementsByClassName("fa-plus-square");
-    for (const moreButton of moreButtons) {
-        moreButton.addEventListener('click', function(event) {
-            event.preventDefault();
-            let quantityElement = moreButton.parentElement.nextElementSibling;
-            let quantityValue = quantityElement.getAttribute("value");
-            quantityValue++;
-            quantityElement.setAttribute("value",quantityValue);
-            quantityElement.innerHTML = quantityValue;
-            let key = moreButton.parentElement.getAttribute("value");
-            quantityItemUpdate(key,quantityValue);
-            globalCartValuesUpdate()
-        });
-    }
+    modifyArticleQuantityOnClick('fa-plus-square','more');
 }
 
 //Decrease number of article in cart--------------
 function decreaseArticleQuantityOnClick() {
-    let minusButtons = document.getElementsByClassName("fa-minus-square");
-    for (const minusButton of minusButtons) {
-        minusButton.addEventListener('click', function(event) {
+    modifyArticleQuantityOnClick('fa-minus-square','minus');
+}
+
+//Generic quantity update--------------------------------
+function modifyArticleQuantityOnClick(classButton,type) {
+    let buttons = document.getElementsByClassName(classButton);
+    for (const button of buttons) {
+        button.addEventListener('click', function(event) {
             event.preventDefault();
-            let quantityElement = minusButton.parentElement.previousElementSibling;
-            let quantityValue = quantityElement.getAttribute("value");
-            if(quantityValue>1) {
-                quantityValue--;
-                quantityElement.setAttribute("value", quantityValue);
-                quantityElement.innerHTML = quantityValue;
-                let key = minusButton.parentElement.getAttribute("value");
-                quantityItemUpdate(key,quantityValue);
-                globalCartValuesUpdate()
+            let quantityElement;
+            let quantityValue;
+            if (type == 'more') {
+                quantityElement = button.parentElement.nextElementSibling;
+                quantityValue = quantityElement.getAttribute("value");
+                quantityValue++;
+            } else {
+                quantityElement = button.parentElement.previousElementSibling;
+                quantityValue = quantityElement.getAttribute("value");
+                if(quantityValue>1) {
+                    quantityValue--;
+                }
             }
+            quantityElement.setAttribute("value", quantityValue);
+            quantityElement.innerHTML = quantityValue;
+            let key = button.parentElement.getAttribute("value");
+            quantityItemUpdate(key,quantityValue);
+            globalCartValuesUpdate()
         });
     }
 }
@@ -156,26 +156,52 @@ function inputValidation(input){
             valid = validCheckboxInput(input);
         break;
         default:
-            valid = validRequiredInput(input);
+            valid = validTextInput(input);
     }
     return valid;
 }
 
-//Required input validation--------------------
-function validRequiredInput(input) {
-    if (input.value == "") {
-        input.nextElementSibling.style.display = "block";
-        return false;
+//Text input validation--------------------
+function validTextInput(input) {
+    let inputId = input.id;
+    if (inputId == 'lastNameInput' || inputId == 'firstNameInput') {
+        validNameInput(input);
+    } else if (inputId == 'addressInput') {
+        validAddressInput(input);
     } else {
-        input.nextElementSibling.style.display = "none";
-        return true;
+        validWordInput(input);
     }
+}
+
+//Address input validation------------------------
+function validAddressInput(input) {
+    let addressRegex = /^.*\b(?!\d{5}[A-Z]?\b)(\d+(?:\s*[A-Z]\b)?)/;
+    addressRegex = /^([0-9]{1,4})([A-Za-zéèàê\s]{5,70})$/;
+    regexValidation(input,addressRegex);
+}
+
+//City input validation------------------------
+function validWordInput(input) {
+    let wordRegex = /^[a-zA-Zéèàê]+$/;
+    regexValidation(input,wordRegex);
+}
+
+//Name input validation------------------------
+function validNameInput(input) {
+    let nameRegex = /^[a-zA-Zéè\-]+$/;
+    regexValidation(input,nameRegex);
 }
 
 //Email input validation-------------------------
 function validEmailInput(input) {    
     const regex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-    if (input.value.match(regex)) {
+    regexValidation(input,regex);
+}
+
+//Regex validation--------------------
+function regexValidation(input, regex){
+    let inputValue = input.value.trim();
+    if (inputValue.match(regex)) {
         input.nextElementSibling.style.display = "none";
         return true;
     } else {

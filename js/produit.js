@@ -59,27 +59,29 @@ function createSelectOptions(selectElement, selectOptions) {
 
 //Increase the number of articles----------------
 function increaseArticleNumberOnClick() {
-    document.querySelector("#moreButton").addEventListener('click', function(event) {
-        event.preventDefault();
-        let quantityElement = document.getElementById("quantity");
-        let quantityValue = quantityElement.value;
-        quantityValue++;
-        quantityElement.value = quantityValue;
-        quantityElement.setAttribute("placeholder", quantityValue);
-    });
+    updateArticleQuantityOnClick('#moreButton','more');
 }
 
 //Decrease the number of articles-------------------
 function decreaseArticleNumberOnClick() {
-    document.querySelector("#minusButton").addEventListener('click', function(event) {
+    updateArticleQuantityOnClick('#minusButton','minus');
+}
+
+//Generic quantity update--------------------------------
+function updateArticleQuantityOnClick(idButton,type) {
+    document.querySelector(idButton).addEventListener('click', function(event) {
         event.preventDefault();
         let quantityElement = document.getElementById("quantity");
         let quantityValue = quantityElement.value;
-        if(quantityValue>1) {
-            quantityValue--;
-            quantityElement.value = quantityValue;
-            quantityElement.setAttribute("placeholder", quantityValue);
-        }      
+        if (type == 'more') {
+            quantityValue++;
+        } else {
+            if(quantityValue>1) {
+                quantityValue--;
+            }      
+        }
+        quantityElement.value = quantityValue;
+        quantityElement.setAttribute("placeholder", quantityValue);
     });
 }
 
